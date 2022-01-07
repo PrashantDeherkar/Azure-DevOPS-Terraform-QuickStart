@@ -22,7 +22,7 @@ stages:
     steps:
     - task: Docker@2
       inputs:
-        containerRegistry: 'prashhome Docker Hub'
+        containerRegistry: 'Prashhome Docker Hub'
         repository: 'prashhome/weatherapi'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
