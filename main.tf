@@ -5,6 +5,12 @@ terraform {
       version = "2.91.0"
     }
   }
+  backend "azurerm" {
+        resource_group_name  = "rgcloudshell"
+        storage_account_name = "cloudshellhmstorage"
+        container_name       = "tfstate"
+        key                  = "terraform.tfstate"
+    }
 }
 
 provider "azurerm" {
@@ -14,6 +20,11 @@ provider "azurerm" {
   }
 }
 
+variable "DockerImageBuild" {
+  type = string
+  description = "Latest Docker Image Tag"
+  
+}
 # Create a resource group
 resource "azurerm_resource_group" "rg_TFtest" {
   name     = "rgAzureDevOpsDemo"
@@ -32,7 +43,7 @@ resource "azurerm_container_group" "tfCg_demo" {
 
   container {
     name   = "weatherapi"
-    image  = "prashhome/weatherapi"
+    image  = "prashhome/weatherapi:${var.DockerImageBuild}"
     cpu    = "1"
     memory = "1"
 
