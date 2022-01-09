@@ -34,24 +34,6 @@ namespace WeatherAPI.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
-        }
-        [HttpGet]
-        public IEnumerable<WeatherForecastCity> Get(string city)
-        {
-            if (string.IsNullOrWhiteSpace(city))
-            {
-                // Set default city
-                city = "Pune";
-            }
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecastCity
-            {
-                City = city,
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
-        }
+        }        
     }
 }
