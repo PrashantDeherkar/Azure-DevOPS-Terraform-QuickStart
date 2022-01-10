@@ -10,6 +10,7 @@ resources:
 
 variables:
   tag: '$(Build.BuildId)'
+  dockerImageRepository: 'prashhome/weatherapi'
 
 stages:
 - stage: Build
@@ -23,7 +24,7 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'Prashhome Docker Hub'
-        repository: 'prashhome/weatherapi'
+        repository: $(dockerImageRepository)
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
         tags: |
@@ -51,4 +52,4 @@ stages:
         ARM_CLIENT_SECRET: $(ARM_CLIENT_SECRET)
         ARM_TENANT_ID: $(ARM_TENANT_ID)
         ARM_SUBSCRIPTION_ID: $(ARM_SUBSCRIPTION_ID)
-        TF_VAR_DockerImageBuild: $(tag)
+        TF_VAR_DockerImageBuild: $(dockerImageRepository):$(tag)

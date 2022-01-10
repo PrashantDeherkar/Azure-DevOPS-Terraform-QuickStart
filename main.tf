@@ -43,7 +43,7 @@ resource "azurerm_container_group" "tfCg_demo" {
 
   container {
     name   = "weatherapi"
-    image  = "prashhome/weatherapi:${var.DockerImageBuild}"
+    image  = "${var.DockerImageBuild}"
     cpu    = "1"
     memory = "1"
 
